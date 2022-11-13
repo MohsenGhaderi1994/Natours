@@ -1,0 +1,30 @@
+{
+  "name": "natours",
+  "version": "1.0.0",
+  "description": "natours api",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohsenGhaderi1994/Natours.git"
+  },
+  "keywords": [
+    "natours",
+    "api"
+  ],
+  "author": "Mohsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohsenGhaderi1994/Natours/issues"
+  },
+  "homepage": "https://github.com/MohsenGhaderi1994/Natours#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
