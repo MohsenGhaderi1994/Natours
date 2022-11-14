@@ -4,7 +4,7 @@
   "description": "natours api",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/MohsenGhaderi1994/Natours#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "slugify": "^1.6.5"
   },
   "devDependencies": {
