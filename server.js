@@ -11,7 +11,7 @@ const DB = process.env.DATABASE_CONNECTION_STRING.replace(
 console.log(`DB connection string: ${DB}`);
 mongoose.connect(DB).then((con) => {
     console.log('DB connection stablished!');
-    console.log(con.connections);
+    //console.log(con.connections);
 });
 
 app.listen(port, () => {

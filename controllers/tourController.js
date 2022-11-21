@@ -1,5 +1,6 @@
 const Tour = require('../models/tourModel');
 const CONSTS = require('../HTTP_RESPONSE_CODES');
+const APIFeatures = require('./../utils/APIFeatures');
 exports.createTour = async (req, res) => {
     /* we call the save method on the document
   const newTour = new Tour({})
@@ -22,14 +23,33 @@ exports.createTour = async (req, res) => {
 
 exports.getAllTours = async (req, res) => {
     try {
-        const tours = await Tour.find();
-        res.status(CONSTS.HTTP_OK).json({ status: 'Success', data: { tours } });
+        console.log(`getAllTours::req.query: ${JSON.stringify(req.query)}`);
+
+        const features = new APIFeatures(Tour.find(), req.query)
+            .filter()
+            .sort()
+            .limitField()
+            .paginate();
+        const tours = await features.query;
+
+        res.status(CONSTS.HTTP_OK).json({
+            status: 'Success',
+            dataSize: tours.length,
+            data: { tours }
+        });
     } catch (err) {
         res.status(CONSTS.HTTP_NOT_FOUND).json({
             status: 'fail',
             message: err
         });
     }
+};
+
+exports.aliasTopTours = (req, res, next) => {
+    req.query.limit = '5';
+    req.query.sort = '-ratingsAvergae,price';
+    req.query.fields = 'name,price,ratingAverage,summary,difficulty';
+    next();
 };
 
 exports.getTour = async (req, res) => {
