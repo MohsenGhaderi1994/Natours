@@ -1,6 +1,8 @@
 const express = require('express');
-
+const CONSTS = require('./HTTP_RESPONSE_CODES');
+const AppError = require('./utils/AppError');
 const morgan = require('morgan');
+const globalErrorHandler = require('./controllers/globalErrorHandler');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 
@@ -18,5 +20,18 @@ app.use((req, res, next) => {
 //Routers
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+
+//other routes
+app.all('*', (req, res, next) => {
+    next(
+        new AppError(
+            `Cannot find reosurse ${req.originalUrl} on server side!`,
+            CONSTS.HTTP_NOT_FOUND
+        )
+    );
+});
+
+//Global Error handler
+app.use(globalErrorHandler);
 
 module.exports = app;

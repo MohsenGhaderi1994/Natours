@@ -24,7 +24,7 @@ class APIFeatures {
             const sortBy = this.queryString.sort.split(',').join(' ');
             this.query = this.query.sort(sortBy);
         } else {
-            query = query.sort('price');
+            this.query = this.query.sort('price');
         }
         return this;
     }

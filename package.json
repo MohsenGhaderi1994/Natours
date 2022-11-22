@@ -4,7 +4,8 @@
     "description": "natours api",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon server.js"
+        "start": "nodemon server.js",
+        "debug": "ndb server.js"
     },
     "repository": {
         "type": "git",
@@ -28,6 +29,7 @@
         "slugify": "^1.6.5"
     },
     "devDependencies": {
+        "ndb": "^1.1.5",
         "nodemon": "^2.0.20"
     },
     "engines": {
