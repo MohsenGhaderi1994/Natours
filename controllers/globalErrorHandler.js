@@ -8,9 +8,11 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateFieldDB = (err) => {
     console.log(`handleDuplicateFieldDB::error -> ${JSON.stringify(err)}`);
-    const value = err.keyValue.name;
-    console.log(`handleDuplicateFieldDB::value -> <${value}>`);
-    const message = `duplicate field value ${value}, please use another value!`;
+    const value = err.keyValue;
+    console.log(`handleDuplicateFieldDB::value -> <${JSON.stringify(value)}>`);
+    const message = `duplicate field value ${JSON.stringify(
+        value
+    )}, please use another value!`;
     return new AppError(message, CONSTS.HTTP_BAD_REQUEST);
 };
 
