@@ -1,19 +1,13 @@
-exports.createUser = (req, res) => {
-  res.status(200).json({ status: "Successful!", data: req.body });
-};
+const User = require('../models/userModel');
+const CONSTS = require('../HTTP_RESPONSE_CODES');
+const catchAsync = require('./../utils/catchAsync');
 
-exports.getAllUsers = (req, res) => {
-  res.status(200).json({ status: "Successful!", data: req.body });
-};
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+    const users = await User.find();
 
-exports.getUser = (req, res) => {
-  res.status(200).json({ status: "Successful!", data: req.body });
-};
-
-exports.updateUser = (req, res) => {
-  res.status(200).json({ status: "Successful!", data: req.body });
-};
-
-exports.deleteUser = (req, res) => {
-  res.status(200).json({ status: "Successful!", data: req.body });
-};
+    res.status(CONSTS.HTTP_OK).json({
+        status: 'Success',
+        dataSize: users.length,
+        data: { users }
+    });
+});
