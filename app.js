@@ -20,6 +20,13 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    if (process.env.NODE_ENV === 'development') {
+        console.log(`request header is : ${JSON.stringify(req.headers)}`);
+    }
+    next();
+});
+
 //Routers
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);

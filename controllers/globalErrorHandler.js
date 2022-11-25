@@ -50,6 +50,18 @@ const sendErrorProduction = (err, res) => {
     }
 };
 
+const handleTokenValidation = () =>
+    new AppError(
+        'Token is invalid! Please login again.',
+        CONSTS.HTTP_UNATHORIZED
+    );
+
+const handleTokenExpired = () =>
+    new AppError(
+        'Token is expired! Please login again.',
+        CONSTS.HTTP_UNATHORIZED
+    );
+
 const globalerrorHandler = (err, req, res, next) => {
     console.log(`globalerrorHandler::error -> ${JSON.stringify(err)}`);
     console.log(`globalerrorHandler::errormessage -> ${err.message}`);
@@ -64,6 +76,8 @@ const globalerrorHandler = (err, req, res, next) => {
         if (error.code === 11000) error = handleDuplicateFieldDB(error);
         if (error.name === 'ValidationError')
             error = handleValidationErrorDB(error);
+        if (error.name === 'JsonWebTokenError') error = handleTokenValidation();
+        if (error.name === 'TokenExpiredError') error = handleTokenExpired();
         sendErrorProduction(error, res);
     }
 };
