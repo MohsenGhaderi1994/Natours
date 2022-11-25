@@ -27,6 +27,13 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    if (process.env.NODE_ENV === 'development') {
+        console.log(`request params is : ${JSON.stringify(req.params)}`);
+    }
+    next();
+});
+
 //Routers
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
